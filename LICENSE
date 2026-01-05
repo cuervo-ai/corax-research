@@ -64,7 +64,9 @@ limitations under the License.
 The full source code implementation of CORVUS-CORAX is maintained in a
 separate repository and is subject to different licensing terms.
 
-For commercial licensing inquiries, contact: [contact@cuervo.ai]
+For commercial licensing inquiries: licensing@cuervo.cloud
+For technical inquiries: research@cuervo.cloud
+Website: https://cuervo.cloud
 
 ## Citation
 
@@ -77,10 +79,10 @@ If you use this research in your work, please cite:
   author={{CORVUS-CORAX Research Team}},
   year={2026},
   month={January},
-  institution={Cuervo AI},
+  institution={Cuervo Cloud},
   url={https://github.com/cuervo-ai/corax-research}
 }
 ```
 
 ---
-Copyright (c) 2026 Cuervo AI. All rights reserved where applicable.
+Copyright (c) 2026 Cuervo Cloud. All rights reserved where applicable.
