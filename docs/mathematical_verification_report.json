@@ -1,0 +1,328 @@
+{
+  "framework": "CORVUS-CORAX Mathematical Verification",
+  "version": "1.0.0",
+  "generated": "2026-01-05T13:43:54.025493",
+  "device": "mps",
+  "seed": 42,
+  "results": [
+    {
+      "test_name": "moe_routing_complexity",
+      "claim": "MoE routing complexity is O(n \u00d7 k) where n=seq_len, k=num_selected",
+      "verified": false,
+      "expected_value": "O(n)",
+      "measured_value": "O(n\u00b2)",
+      "tolerance": 0.05,
+      "statistical_significance": 0.9613525734573479,
+      "num_trials": 20,
+      "confidence_interval": [
+        0.9413525734573479,
+        0.9813525734573479
+      ],
+      "details": {
+        "num_experts": 8,
+        "num_selected": 2,
+        "d_model": 512,
+        "sequence_lengths": [
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096
+        ],
+        "times_ms": [
+          1.7436603499999759,
+          2.0359667499999956,
+          2.518102099999986,
+          1.8826249500000447,
+          2.7273853000000403,
+          5.526216600000011
+        ],
+        "r_squared": 0.9613525734573479,
+        "coefficients": [
+          0.756491848757492,
+          -0.1276220566980637,
+          0.3694438718504449
+        ]
+      },
+      "timestamp": "2026-01-05T13:43:39.240627"
+    },
+    {
+      "test_name": "moe_load_balancing",
+      "claim": "Aux-loss-free load balancing achieves balanced expert usage",
+      "verified": "True",
+      "expected_value": {
+        "load_std": "<0.2",
+        "load_ratio": "<3.0",
+        "entropy_ratio": ">0.8"
+      },
+      "measured_value": {
+        "load_std": 0.0021095029078423977,
+        "load_ratio": 1.0521989562817824,
+        "entropy_ratio": 0.9999400381302346
+      },
+      "tolerance": 0.1,
+      "statistical_significance": 0.9978904970921576,
+      "num_trials": 1,
+      "confidence_interval": [
+        0.9499400381302345,
+        1.0499400381302346
+      ],
+      "details": {
+        "num_experts": 8,
+        "num_selected": 2,
+        "num_tokens": 10000,
+        "expert_counts": [
+          2496.0,
+          2433.0,
+          2560.0,
+          2460.0,
+          2547.0,
+          2489.0,
+          2520.0,
+          2495.0
+        ],
+        "load_normalized": [
+          0.12479999661445618,
+          0.12165000289678574,
+          0.12800000607967377,
+          0.12300000339746475,
+          0.12735000252723694,
+          0.12444999814033508,
+          0.12600000202655792,
+          0.12475000321865082
+        ],
+        "final_bias": [
+          -0.09000002592802048,
+          0.29600000381469727,
+          -0.12999999523162842,
+          0.04500000551342964,
+          0.02599998190999031,
+          0.13600000739097595,
+          -0.1629999876022339,
+          -0.12000001221895218
+        ]
+      },
+      "timestamp": "2026-01-05T13:43:39.553291"
+    },
+    {
+      "test_name": "mla_compression_ratio",
+      "claim": "MLA achieves 7x KV-cache compression",
+      "verified": true,
+      "expected_value": 7.0,
+      "measured_value": 8.0,
+      "tolerance": 0.0,
+      "statistical_significance": 1.0,
+      "num_trials": 5,
+      "confidence_interval": [
+        8.0,
+        8.0
+      ],
+      "details": {
+        "d_model": 4096,
+        "latent_dim": 512,
+        "theoretical_ratio": 8.0,
+        "results_per_length": [
+          {
+            "seq_len": 512,
+            "standard_kv_mb": 16.0,
+            "compressed_mb": 1.0,
+            "ratio": 16.0
+          },
+          {
+            "seq_len": 1024,
+            "standard_kv_mb": 32.0,
+            "compressed_mb": 2.0,
+            "ratio": 16.0
+          },
+          {
+            "seq_len": 2048,
+            "standard_kv_mb": 64.0,
+            "compressed_mb": 4.0,
+            "ratio": 16.0
+          },
+          {
+            "seq_len": 4096,
+            "standard_kv_mb": 128.0,
+            "compressed_mb": 8.0,
+            "ratio": 16.0
+          },
+          {
+            "seq_len": 8192,
+            "standard_kv_mb": 256.0,
+            "compressed_mb": 16.0,
+            "ratio": 16.0
+          }
+        ],
+        "compress_params": 2097152,
+        "decompress_k_params": 2097152,
+        "decompress_v_params": 2097152
+      },
+      "timestamp": "2026-01-05T13:43:39.586537"
+    },
+    {
+      "test_name": "mla_attention_complexity",
+      "claim": "MLA attention complexity is O(n\u00b2) in sequence length",
+      "verified": "True",
+      "expected_value": "O(n\u00b2)",
+      "measured_value": "O(n\u00b2)",
+      "tolerance": 0.05,
+      "statistical_significance": 0.9998888837938721,
+      "num_trials": 15,
+      "confidence_interval": [
+        0.9798888837938721,
+        1.0
+      ],
+      "details": {
+        "d_model": 512,
+        "num_heads": 8,
+        "sequence_lengths": [
+          64,
+          128,
+          256,
+          512,
+          1024
+        ],
+        "times_ms": [
+          0.8777028000000501,
+          1.080288800000062,
+          1.5880890000000332,
+          3.414238933333369,
+          9.15598599999991
+        ],
+        "r_squared": 0.9998888837938721,
+        "coefficients": [
+          0.6761914763730165,
+          0.24900307840087532,
+          0.07540833863136653
+        ]
+      },
+      "timestamp": "2026-01-05T13:43:39.952143"
+    },
+    {
+      "test_name": "mamba_linear_complexity",
+      "claim": "Mamba complexity is O(n) in sequence length",
+      "verified": false,
+      "expected_value": "O(n)",
+      "measured_value": "O(n\u00b2)",
+      "tolerance": 0.05,
+      "statistical_significance": 0.9981899435253301,
+      "num_trials": 10,
+      "confidence_interval": [
+        0.9781899435253301,
+        1.0
+      ],
+      "details": {
+        "d_model": 256,
+        "d_state": 16,
+        "sequence_lengths": [
+          256,
+          512,
+          1024,
+          2048,
+          4096,
+          8192
+        ],
+        "times_ms": [
+          16.543637500000052,
+          27.98574150000004,
+          52.56273319999991,
+          81.49925429999989,
+          145.52012509999992,
+          318.66628330000015
+        ],
+        "r_squared": 0.9981899435253301,
+        "coefficients": [
+          0.19901304932866443,
+          0.7536138594181553,
+          0.04468737659015501
+        ]
+      },
+      "timestamp": "2026-01-05T13:43:47.934785"
+    },
+    {
+      "test_name": "mamba_vs_attention_efficiency",
+      "claim": "Mamba achieves significant speedup over attention for long sequences",
+      "verified": false,
+      "expected_value": ">=2x speedup at long sequences",
+      "measured_value": "0.17x at seq_len=2048",
+      "tolerance": 0.5,
+      "statistical_significance": 0.033472388274903286,
+      "num_trials": 10,
+      "confidence_interval": [
+        0.1506257472370648,
+        0.1840981355119681
+      ],
+      "details": {
+        "d_model": 256,
+        "sequence_lengths": [
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048
+        ],
+        "mamba_times_ms": [
+          4.004895800000341,
+          5.444720800000091,
+          9.97438740000014,
+          24.046299799999815,
+          44.370949800000226,
+          81.02130859999993
+        ],
+        "attention_times_ms": [
+          0.7363874999995801,
+          0.7111206999997677,
+          0.8348333000000707,
+          1.6524834000000155,
+          5.075254299999976,
+          13.559883499999792
+        ],
+        "speedups": [
+          0.1838718250795732,
+          0.13060737659858623,
+          0.08369770157514224,
+          0.06872090150019788,
+          0.11438236780768551,
+          0.16736194137451643
+        ],
+        "crossover_point": null
+      },
+      "timestamp": "2026-01-05T13:43:50.593550"
+    },
+    {
+      "test_name": "numerical_stability",
+      "claim": "Core operations maintain numerical stability (no NaN/Inf)",
+      "verified": true,
+      "expected_value": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "max_gradient": "<1e6"
+      },
+      "measured_value": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "max_gradient": 3.372872185540554e-13
+      },
+      "tolerance": 0.0,
+      "statistical_significance": 1.0,
+      "num_trials": 1000,
+      "confidence_interval": [
+        3.372872185540554e-13,
+        3.372872185540554e-13
+      ],
+      "details": {
+        "num_iterations": 1000,
+        "d_model": 512,
+        "gradient_statistics": {
+          "mean": 3.372872185540554e-13,
+          "std": 0.0,
+          "max": 3.372872185540554e-13,
+          "min": 3.372872185540554e-13
+        }
+      },
+      "timestamp": "2026-01-05T13:43:54.024168"
+    }
+  ]
+}
